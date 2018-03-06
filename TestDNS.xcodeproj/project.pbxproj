@@ -14,6 +14,9 @@
 		12A16DA4204F3A91005ED20A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12A16DA2204F3A91005ED20A /* LaunchScreen.storyboard */; };
 		12A16DAF204F3A91005ED20A /* TestDNSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A16DAE204F3A91005ED20A /* TestDNSTests.swift */; };
 		12A16DBA204F3A91005ED20A /* TestDNSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A16DB9204F3A91005ED20A /* TestDNSUITests.swift */; };
+		12A16DC8204F3D1F005ED20A /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A16DC7204F3D1F005ED20A /* NetworkUtils.swift */; };
+		12A16DCA204F4341005ED20A /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A16DC9204F4341005ED20A /* StopWatch.swift */; };
+		12A16DCC204F4387005ED20A /* Ping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A16DCB204F4387005ED20A /* Ping.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		12A16DB5204F3A91005ED20A /* TestDNSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestDNSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12A16DB9204F3A91005ED20A /* TestDNSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDNSUITests.swift; sourceTree = "<group>"; };
 		12A16DBB204F3A91005ED20A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12A16DC7204F3D1F005ED20A /* NetworkUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
+		12A16DC9204F4341005ED20A /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
+		12A16DCB204F4387005ED20A /* Ping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ping.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,9 @@
 				12A16DA0204F3A91005ED20A /* Assets.xcassets */,
 				12A16DA2204F3A91005ED20A /* LaunchScreen.storyboard */,
 				12A16DA5204F3A91005ED20A /* Info.plist */,
+				12A16DC7204F3D1F005ED20A /* NetworkUtils.swift */,
+				12A16DC9204F4341005ED20A /* StopWatch.swift */,
+				12A16DCB204F4387005ED20A /* Ping.swift */,
 			);
 			path = TestDNS;
 			sourceTree = "<group>";
@@ -260,7 +269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				12A16D9C204F3A91005ED20A /* ViewController.swift in Sources */,
+				12A16DC8204F3D1F005ED20A /* NetworkUtils.swift in Sources */,
 				12A16D9A204F3A91005ED20A /* AppDelegate.swift in Sources */,
+				12A16DCC204F4387005ED20A /* Ping.swift in Sources */,
+				12A16DCA204F4341005ED20A /* StopWatch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
