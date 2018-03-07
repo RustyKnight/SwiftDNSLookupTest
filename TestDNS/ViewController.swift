@@ -21,11 +21,12 @@ class ViewController: UIViewController {
 	@IBOutlet weak var maxTimeLabel: UILabel!
 	@IBOutlet weak var minTimeLabel: UILabel!
 	@IBOutlet weak var avgTimeLabel: UILabel!
-
-	@IBOutlet weak var errorTextView: UITextView!
 	
 	@IBOutlet weak var updateTimeLabel: UILabel!
-	
+  
+  @IBOutlet weak var lastFailureLabel: UILabel!
+  @IBOutlet weak var lastSuccessLabel: UILabel!
+  
 	var formatter: DateComponentsFormatter = {
 		let formatter = DateComponentsFormatter()
 		formatter.allowedUnits = [.day, .hour, .minute, .second]
@@ -44,7 +45,7 @@ class ViewController: UIViewController {
 	var totalLookups: Int = 0
   var errorCount: Int = 0
 	
-	let ping: Ping = Ping()
+	let ping: DNSLookupTimer = DNSLookupTimer()
 	
 	let startTime: Date = Date()
 	
@@ -56,10 +57,16 @@ class ViewController: UIViewController {
 //    hostPortField.text = "8090"
     hostNameField.text = "we.local"
     hostPortField.text = "51234"
+    
+    lastFailureLabel.isHidden = true
+    lastSuccessLabel.isHidden = true
+    
+    lastFailureLabel.text = nil
+    lastSuccessLabel.text = nil
 
 		lookupRateSlider.value = 0
 		
-		errorTextView.text = ""
+//    errorTextView.text = ""
 		
 		updateStatus()
 		
@@ -126,9 +133,7 @@ class ViewController: UIViewController {
 	}
 }
 
-
-
-extension ViewController: PingDelegate {
+extension ViewController: DNSLookupTimerDelegate {
 	
 	func lookup(found: String) {
     guard Thread.isMainThread else {
@@ -137,9 +142,12 @@ extension ViewController: PingDelegate {
       }
       return
     }
-    var text = self.errorTextView.text ?? ""
-    text += "[\(preferredFormatter.string(from: Date()))] Found \(found)\n"
-    self.errorTextView.text = text
+//    var text = self.errorTextView.text ?? ""
+//    text += "[\(preferredFormatter.string(from: Date()))] Found \(found)\n"
+//    self.errorTextView.text = text
+    
+    lastSuccessLabel.text = "[\(preferredFormatter.string(from: Date()))] \(found)"
+    lastSuccessLabel.isHidden = false
 	}
 	
 	func lookupFailed(with: Error) {
@@ -150,10 +158,8 @@ extension ViewController: PingDelegate {
       return
     }
     self.errorCount += 1
-    self.updateStatus()
-    var text = self.errorTextView.text ?? ""
-    text += "\(with)\n"
-    self.errorTextView.text = text
+    lastFailureLabel.text = "\(with)"
+    lastFailureLabel.isHidden = false
 	}
 	
 	func lookupPerformedSuccessful(in duration: TimeInterval) {

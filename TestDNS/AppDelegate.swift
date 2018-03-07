@@ -10,8 +10,7 @@ import UIKit
 
 var preferredFormatter: DateFormatter = {
 	let formatter = DateFormatter()
-	formatter.dateStyle = .short
-	formatter.timeStyle = .short
+  formatter.dateFormat = "dd MMM yyyy HH:mm:ss"
 	return formatter
 }()
 
