@@ -12,9 +12,10 @@ class ViewController: UIViewController {
 
 	@IBOutlet weak var hostNameField: UITextField!
 	@IBOutlet weak var hostPortField: UITextField!
-	@IBOutlet weak var lookupCountLabel: UILabel!
-	
-	@IBOutlet weak var lookupRateLabel: UILabel!
+	@IBOutlet weak var lookupCountLabel: UILabel!	
+  @IBOutlet weak var errorCountLabel: UILabel!
+  
+  @IBOutlet weak var lookupRateLabel: UILabel!
 	@IBOutlet weak var lookupRateSlider: UISlider!
 	
 	@IBOutlet weak var maxTimeLabel: UILabel!
@@ -41,6 +42,7 @@ class ViewController: UIViewController {
 	var minTime: TimeInterval = 0
 	var totalTime: TimeInterval = 0
 	var totalLookups: Int = 0
+  var errorCount: Int = 0
 	
 	let ping: Ping = Ping()
 	
@@ -50,9 +52,11 @@ class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		hostNameField.text = "confluence.worldreach.local"
-		hostPortField.text = "8090"
-		
+//    hostNameField.text = "confluence.worldreach.local"
+//    hostPortField.text = "8090"
+    hostNameField.text = "we.local"
+    hostPortField.text = "51234"
+
 		lookupRateSlider.value = 0
 		
 		errorTextView.text = ""
@@ -75,7 +79,8 @@ class ViewController: UIViewController {
 			let upTime = Date().timeIntervalSince(self.startTime)
 			self.updateTimeLabel.text = self.formatter.string(from: upTime)
 		})
-	}
+    
+  }
 	
 	@objc func dismissKeyboard() {
 		//Causes the view (or one of its embedded text fields) to resign the first responder status.
@@ -84,6 +89,7 @@ class ViewController: UIViewController {
 	
 	func updateStatus() {
 		lookupCountLabel.text = String(totalLookups)
+    errorCountLabel.text = String(errorCount)
 		
 		maxTimeLabel.text = formatter.string(from: maxTime) ?? "0"
 		minTimeLabel.text = formatter.string(from: minTime) ?? "0"
@@ -120,31 +126,47 @@ class ViewController: UIViewController {
 	}
 }
 
+
+
 extension ViewController: PingDelegate {
 	
 	func lookup(found: String) {
-		onMainThreadDo {
-			var text = self.errorTextView.text ?? ""
-			text += "[\(preferredFormatter.string(from: Date()))] Found \(found)\n"
-			self.errorTextView.text = text
-		}
+    guard Thread.isMainThread else {
+      onMainThreadDo {
+        self.lookup(found: found)
+      }
+      return
+    }
+    var text = self.errorTextView.text ?? ""
+    text += "[\(preferredFormatter.string(from: Date()))] Found \(found)\n"
+    self.errorTextView.text = text
 	}
 	
 	func lookupFailed(with: Error) {
-		onMainThreadDo {
-			var text = self.errorTextView.text ?? ""
-			text += "\(with)\n"
-			self.errorTextView.text = text
-		}
+    guard Thread.isMainThread else {
+      onMainThreadDo {
+        self.lookupFailed(with: with)
+      }
+      return
+    }
+    self.errorCount += 1
+    self.updateStatus()
+    var text = self.errorTextView.text ?? ""
+    text += "\(with)\n"
+    self.errorTextView.text = text
 	}
 	
 	func lookupPerformedSuccessful(in duration: TimeInterval) {
-		onMainThreadDo {
-			self.totalTime += duration
-			self.totalLookups += 1
-			self.minTime = min(self.minTime, duration)
-			self.maxTime = max(self.maxTime, duration)
-			self.updateStatus()
-		}
+    guard Thread.isMainThread else {
+      onMainThreadDo {
+        self.lookupPerformedSuccessful(in: duration)
+      }
+      return
+    }
+    self.totalTime += duration
+    self.totalLookups += 1
+    self.minTime = min(self.minTime, duration)
+    self.maxTime = max(self.maxTime, duration)
+    self.updateStatus()
 	}
 }

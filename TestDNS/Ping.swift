@@ -82,23 +82,38 @@ protocol PingDelegate {
 													 ai_addr: nil,
 													 ai_next: nil)
 			
-			let stopWatch = StopWatch().start()
-			do {
-				let result = try NetworkUtils.getaddrinfo(node: hostName,
-																									service: hostPort,
-																									hints: hints)
-				stopWatch.stop()
-				self.delegate?.lookupPerformedSuccessful(in: stopWatch.duration)
-				for address in result {
-					print("Ping: Found \(address)")
-					self.delegate?.lookup(found: address)
-				}
-			} catch let error {
-				stopWatch.stop()
-				print("!! Ping: Lookup failed with \(error)")
-				self.delegate?.lookupFailed(with: error)
-				self.delegate?.lookupPerformedSuccessful(in: stopWatch.duration)
-			}
+      var error: Error? = nil
+      var tries: Int = 0
+      var ok = true
+      
+      let stopWatch = StopWatch().start()
+      repeat {
+        do {
+          let result = try NetworkUtils.getaddrinfo(node: hostName,
+                                                    service: hostPort,
+                                                    hints: hints)
+          stopWatch.stop()
+          self.delegate?.lookupPerformedSuccessful(in: stopWatch.duration)
+          for address in result {
+            print("Ping: Found \(address)")
+            self.delegate?.lookup(found: address)
+          }
+        } catch let badThings {
+          stopWatch.stop()
+          ok = false
+          print("!! Ping: (\(tries)) Lookup failed with \(String(describing: badThings))")
+          
+          tries += 1
+          if tries > 3 {
+            error = badThings
+            ok = true
+          }
+        }
+      } while !ok
+      if let result = error {
+        self.delegate?.lookupFailed(with: result)
+        self.delegate?.lookupPerformedSuccessful(in: stopWatch.duration)
+      }
 		}
 	}
 }
