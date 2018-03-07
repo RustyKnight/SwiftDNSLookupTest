@@ -18,6 +18,8 @@
 		12A16DCA204F4341005ED20A /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A16DC9204F4341005ED20A /* StopWatch.swift */; };
 		12A16DCC204F4387005ED20A /* DNSLookupTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A16DCB204F4387005ED20A /* DNSLookupTimer.swift */; };
 		7023DBF2205091DE00F70EE3 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7023DBF1205091DE00F70EE3 /* RepeatingTimer.swift */; };
+		7023DBF720509AF800F70EE3 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 7023DBF520509AF800F70EE3 /* SimplePing.m */; };
+		7023DBF920509B4E00F70EE3 /* SwiftPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7023DBF820509B4E00F70EE3 /* SwiftPing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,10 @@
 		12A16DC9204F4341005ED20A /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 		12A16DCB204F4387005ED20A /* DNSLookupTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSLookupTimer.swift; sourceTree = "<group>"; };
 		7023DBF1205091DE00F70EE3 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
+		7023DBF420509AF700F70EE3 /* TestDNS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestDNS-Bridging-Header.h"; sourceTree = "<group>"; };
+		7023DBF520509AF800F70EE3 /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
+		7023DBF620509AF800F70EE3 /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
+		7023DBF820509B4E00F70EE3 /* SwiftPing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,7 @@
 		12A16D98204F3A91005ED20A /* TestDNS */ = {
 			isa = PBXGroup;
 			children = (
+				7023DBF320509ADC00F70EE3 /* Ping */,
 				12A16D99204F3A91005ED20A /* AppDelegate.swift */,
 				12A16D9B204F3A91005ED20A /* ViewController.swift */,
 				12A16D9D204F3A91005ED20A /* Main.storyboard */,
@@ -135,6 +142,17 @@
 				12A16DBB204F3A91005ED20A /* Info.plist */,
 			);
 			path = TestDNSUITests;
+			sourceTree = "<group>";
+		};
+		7023DBF320509ADC00F70EE3 /* Ping */ = {
+			isa = PBXGroup;
+			children = (
+				7023DBF620509AF800F70EE3 /* SimplePing.h */,
+				7023DBF520509AF800F70EE3 /* SimplePing.m */,
+				7023DBF420509AF700F70EE3 /* TestDNS-Bridging-Header.h */,
+				7023DBF820509B4E00F70EE3 /* SwiftPing.swift */,
+			);
+			path = Ping;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +295,8 @@
 				12A16DC8204F3D1F005ED20A /* NetworkUtils.swift in Sources */,
 				12A16D9A204F3A91005ED20A /* AppDelegate.swift in Sources */,
 				12A16DCC204F4387005ED20A /* DNSLookupTimer.swift in Sources */,
+				7023DBF920509B4E00F70EE3 /* SwiftPing.swift in Sources */,
+				7023DBF720509AF800F70EE3 /* SimplePing.m in Sources */,
 				12A16DCA204F4341005ED20A /* StopWatch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,7 +474,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beamcommunications.TestDNS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TestDNS/Ping/TestDNS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -472,7 +492,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beamcommunications.TestDNS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TestDNS/Ping/TestDNS-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

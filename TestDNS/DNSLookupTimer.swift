@@ -51,11 +51,11 @@ protocol DNSLookupTimerDelegate {
   func start() {
     stop()
     guard hostName != nil && hostPort != nil else {
-      print("!! Ping: Invalid host name, can not start")
+      print("!! Lookup: Invalid host name, can not start")
       return
     }
     guard let timeRate = timeRate else {
-      print("!! Ping: Invalid time rate, can not start")
+      print("!! Lookup: Invalid time rate, can not start")
       return
     }
     onBackgroundThreadDo {
@@ -69,7 +69,7 @@ protocol DNSLookupTimerDelegate {
   
   func performReverseLookup() {
     guard let hostName = self.hostName, let hostPort = self.hostPort else {
-      print("!! Ping: Invalid host name or port, can not perform reverse loopkup")
+      print("!! Lookup: Invalid host name or port, can not perform reverse loopkup")
       self.stop()
       return
     }
@@ -92,16 +92,17 @@ protocol DNSLookupTimerDelegate {
         let result = try NetworkUtils.getaddrinfo(node: hostName,
                                                   service: hostPort,
                                                   hints: hints)
+        ok = true
         stopWatch.stop()
         self.delegate?.lookupPerformedSuccessful(in: stopWatch.duration)
         for address in result {
-          print("Ping: Found \(address)")
+          print("Lookup: Found \(address)")
           self.delegate?.lookup(found: address)
         }
       } catch let badThings {
         stopWatch.stop()
         ok = false
-        print("!! Ping: (\(tries)) Lookup failed with \(String(describing: badThings))")
+        print("!! Lookup: (\(tries)) Lookup failed with \(String(describing: badThings))")
         
         tries += 1
         if tries > 3 {

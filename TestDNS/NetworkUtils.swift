@@ -29,7 +29,7 @@ struct NetworkUtils {
 		var err: Int32
 		var res: UnsafeMutablePointer<addrinfo>?
 		
-		print("Pinging \(node):\(service)")
+		print("getaddrinfo \(node):\(service)")
 		if var hints = hints {
 			err = Darwin.getaddrinfo(node, service, &hints, &res)
 		} else {
