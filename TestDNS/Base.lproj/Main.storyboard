@@ -266,8 +266,8 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ping..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDd-oV-pRM">
-                                <rect key="frame" x="163.5" y="493.5" width="48" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ping..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDd-oV-pRM">
+                                <rect key="frame" x="8" y="493.5" width="359" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -281,9 +281,11 @@
                             <constraint firstItem="0ja-oR-fs8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="53N-O2-NJh"/>
                             <constraint firstItem="HO2-rH-7TG" firstAttribute="top" secondItem="UYS-CW-1LM" secondAttribute="bottom" constant="32" id="5MT-Y2-T8x"/>
                             <constraint firstItem="ONz-WB-0QN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="A3H-B2-2n4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WDd-oV-pRM" secondAttribute="trailing" constant="8" id="Bug-1e-DtE"/>
                             <constraint firstItem="5Yd-oA-NCC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Erx-yD-B1u"/>
                             <constraint firstItem="WDd-oV-pRM" firstAttribute="top" secondItem="8vM-eF-yvF" secondAttribute="bottom" constant="32" id="FXW-yD-Vlu"/>
                             <constraint firstItem="8vM-eF-yvF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Hlg-0Q-vvm"/>
+                            <constraint firstItem="WDd-oV-pRM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="Ijd-OZ-9jL"/>
                             <constraint firstItem="0ja-oR-fs8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="LKi-Wl-29P"/>
                             <constraint firstItem="HO2-rH-7TG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OL8-Mh-Nea"/>
                             <constraint firstItem="1XA-Ox-HC7" firstAttribute="top" secondItem="S9f-vH-CYu" secondAttribute="bottom" constant="32" id="VFj-wD-oUq"/>

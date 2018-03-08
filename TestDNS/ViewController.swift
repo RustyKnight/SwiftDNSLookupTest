@@ -53,7 +53,7 @@ class ViewController: UIViewController {
   var lookupRate: TimeInterval = 60
   
   var maxTime: TimeInterval = 0
-  var minTime: TimeInterval = 0
+  var minTime: TimeInterval?
   var totalTime: TimeInterval = 0
   var totalLookups: Int = 0
   var errorCount: Int = 0
@@ -131,7 +131,7 @@ class ViewController: UIViewController {
     errorCountLabel.text = String(errorCount)
     
     maxTimeLabel.text = formatter.string(from: maxTime) ?? "0"
-    minTimeLabel.text = formatter.string(from: minTime) ?? "0"
+    minTimeLabel.text = formatter.string(from: minTime ?? 0.0) ?? "0"
     
     var avgTime = 0.0
     if totalLookups > 0 {
@@ -203,7 +203,7 @@ extension ViewController: DNSLookupTimerDelegate {
     }
     self.totalTime += duration
     self.totalLookups += 1
-    self.minTime = min(self.minTime, duration)
+    self.minTime = min(self.minTime ?? Double.greatestFiniteMagnitude, duration)
     self.maxTime = max(self.maxTime, duration)
     self.updateStatus()
   }
@@ -240,9 +240,9 @@ extension ViewController: SwiftPingDelegate {
     
     let avgTime = totalPingTime / Double(totalPingCount)
     
-    pingMaxTime.text = formatter.string(from: maxPingTime)
-    pingMinTime.text = formatter.string(from: maxPingTime)
-    pingAvgTime.text = formatter.string(from: avgTime)
+    pingMaxTime.text = pingFormatter.string(from: maxPingTime)
+    pingMinTime.text = pingFormatter.string(from: minPingTime ?? 0.0)
+    pingAvgTime.text = pingFormatter.string(from: avgTime)
 
     self.pingCountLabel.text = "\(self.totalPingCount)\\\(self.failedPingCount)"
   }
